@@ -1,0 +1,6 @@
+﻿body {
+    background-image: url('images/exploding_kitten.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+}

@@ -1,0 +1,26 @@
+﻿<section>
+    <div class="buttons-container">
+        @if (Model.CanBeDiscarded())
+        {
+            <button @onclick="Model.Discard" title="Défausser">D</button>
+        }
+
+        @if (Model.CanBeTransferred())
+        {
+            <button @onclick="Model.Transfer" title="Transférer à l'autre joueur">T</button>
+        }
+
+        @if (Model.CanBePutBackInPile())
+        {
+            <button @onclick="Model.PutBackInPile" title="Remettre dans la pile">R</button>
+        }
+
+        @if (Model.CanBeTaken())
+        {
+            <button @onclick="Model.TakeCard(PlayerModel)" title="Remettre dans la pile">R</button>
+        }
+
+    </div>
+
+    <h3>@Model.Name</h3>
+</section>

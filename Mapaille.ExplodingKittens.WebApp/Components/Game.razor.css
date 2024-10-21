@@ -1,0 +1,12 @@
+﻿nav {
+    display: inline-flex;
+}
+
+nav button {
+    margin-right: 0.2rem;
+}
+
+.container {
+    background-color: rgba(239, 207, 160, 0.5);
+    padding: 0.5rem;
+}
