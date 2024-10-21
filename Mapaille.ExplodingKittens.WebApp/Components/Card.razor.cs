@@ -8,8 +8,4 @@ public partial class Card
     [Parameter]
     [EditorRequired]
     public required CardModel Model { get; set; }
-
-    [Parameter]
-    [EditorRequired]
-    public required PlayerModel PlayerModel { get; set; }
 }

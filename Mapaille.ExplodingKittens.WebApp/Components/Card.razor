@@ -15,11 +15,6 @@
             <button @onclick="Model.PutBackInPile" title="Remettre dans la pile">R</button>
         }
 
-        @if (Model.CanBeTaken())
-        {
-            <button @onclick="Model.TakeCard(PlayerModel)" title="Remettre dans la pile">R</button>
-        }
-
     </div>
 
     <h3>@Model.Name</h3>

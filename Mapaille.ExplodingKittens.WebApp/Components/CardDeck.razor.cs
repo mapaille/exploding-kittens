@@ -8,8 +8,4 @@ public partial class CardDeck
     [Parameter]
     [EditorRequired]
     public required List<CardModel> Cards { get; set; }
-
-    [Parameter]
-    [EditorRequired]
-    public required PlayerModel PlayerModel { get; set; }
 }
