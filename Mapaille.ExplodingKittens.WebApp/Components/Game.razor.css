@@ -7,6 +7,9 @@ nav button {
 }
 
 .container {
-    background-color: rgba(239, 207, 160, 0.5);
     padding: 0.5rem;
+}
+
+h3, p {
+    color: white;
 }
