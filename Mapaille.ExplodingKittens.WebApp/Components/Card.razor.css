@@ -17,3 +17,9 @@
     margin-right: 0.2rem;
 }
 
+.bomb {
+    background-image: url('images/bomb.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
