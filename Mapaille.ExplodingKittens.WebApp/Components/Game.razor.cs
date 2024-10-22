@@ -1,5 +1,8 @@
 ﻿using Mapaille.ExplodingKittens.WebApp.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapaille.ExplodingKittens.WebApp.Components;
 
@@ -13,9 +16,20 @@ public partial class Game : IAsyncDisposable
         GameModel.OnUpdate += UpdateState;
     }
 
+    [Inject]
+    [NotNull]
+    public IJSRuntime? JS { get; set; }
+
     public string? SecretPhrase { get; set; }
 
     public bool IsAuthenticated { get; set; }
+
+    public async Task SeeTheFuture()
+    {
+        var next3CardNames = Model.Cards.Take(3).Select(x => x.Name);
+        var message = string.Join(", ", next3CardNames);
+        await JS.InvokeVoidAsync("Alert", message);
+    }
 
     public void HandleKeyPress(KeyboardEventArgs args)
     {
