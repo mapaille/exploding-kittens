@@ -1,5 +1,4 @@
 ﻿using Mapaille.ExplodingKittens.WebApp.Extensions;
-using Microsoft.AspNetCore.Components;
 
 namespace Mapaille.ExplodingKittens.WebApp.Models;
 
@@ -12,6 +11,14 @@ public abstract record CardModel
         _game = game;
     }
 
+    private bool IsDiscarded => _game.DiscardedCards.Contains(this);
+
+    private bool IsInPlayerHands => IsInPlayerAHands || IsInPlayerBHands;
+
+    private bool IsInPlayerAHands => _game.PlayerA.Cards.Contains(this);
+
+    private bool IsInPlayerBHands => _game.PlayerB.Cards.Contains(this);
+
     public Guid Id { get; } = Guid.NewGuid();
 
     public abstract CardType Type { get; }
@@ -20,39 +27,52 @@ public abstract record CardModel
 
     public bool CanBeDiscarded()
     {
-        return IsInPlayerHands();
+        return IsInPlayerHands;
     }
 
     public bool CanBeTransferred()
     {
-        return IsInPlayerHands();
+        return IsInPlayerHands;
     }
 
     public bool CanBePutBackInPile()
     {
-        return IsInPlayerHands() && Type == CardType.ExplodingKitten;
+        return IsInPlayerHands && Type == CardType.ExplodingKitten;
     }
 
-    public bool CanBeTaken()
+    public bool CanBeGiven()
     {
-        return IsDiscarded();
+        return IsDiscarded;
     }
 
-    public EventCallback TakeCard(PlayerModel player)
+    public async void GiveToPlayerA()
     {
-        _game.SafeUpdateAsync(() =>
+        await _game.SafeUpdateAsync(() =>
         {
             var removedFromDiscardedCards = _game.DiscardedCards.Remove(this);
 
             if (removedFromDiscardedCards)
             {
-                player.Cards.Add(this);
+                _game.PlayerA.Cards.Add(this);
             }
 
             return ValueTask.CompletedTask;
-        }).GetAwaiter().GetResult();
+        });
+    }
 
-        return new EventCallback();
+    public async void GiveToPlayerB()
+    {
+        await _game.SafeUpdateAsync(() =>
+        {
+            var removedFromDiscardedCards = _game.DiscardedCards.Remove(this);
+
+            if (removedFromDiscardedCards)
+            {
+                _game.PlayerB.Cards.Add(this);
+            }
+
+            return ValueTask.CompletedTask;
+        });
     }
 
     public async void PutBackInPile()
@@ -119,25 +139,5 @@ public abstract record CardModel
 
             return ValueTask.CompletedTask;
         });
-    }
-
-    private bool IsInPlayerHands()
-    {
-        if (_game.PlayerA.Cards.Contains(this))
-        {
-            return true;
-        }
-
-        if (_game.PlayerB.Cards.Contains(this))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    private bool IsDiscarded()
-    {
-        return _game.DiscardedCards.Contains(this);
     }
 }

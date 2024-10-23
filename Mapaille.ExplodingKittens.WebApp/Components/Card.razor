@@ -15,6 +15,12 @@
             <button @onclick="Model.PutBackInPile" title="Remettre dans la pile">R</button>
         }
 
+        @if (Model.CanBeGiven())
+        {
+            <button @onclick="Model.GiveToPlayerA" title="Transférer à Marc">M</button>
+            <button @onclick="Model.GiveToPlayerB" title="Transférer à Estelle">E</button>
+        }
+
     </div>
 
     <h3>@Model.Name</h3>
