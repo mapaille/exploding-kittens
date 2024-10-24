@@ -1,0 +1,7 @@
+﻿button, input {
+    border: none;
+    border-radius: 0;
+    padding: 0.5rem;
+    background-color: lightgrey;
+    color: black;
+}
