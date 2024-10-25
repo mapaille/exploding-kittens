@@ -2,5 +2,13 @@
     background-image: url('images/exploding_kitten.jpg');
     background-repeat: repeat;
     background-attachment: fixed;
-    background-position: center;
+    background-position: top center;
+}
+
+::deep button, ::deep input {
+    border: none;
+    border-radius: 0;
+    padding: 0.6rem;
+    background-color: #F3F3F3;
+    color: black;
 }

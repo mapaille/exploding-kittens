@@ -28,7 +28,7 @@ public partial class Game : IAsyncDisposable
     {
         var next3CardNames = Model.Cards.Take(3).Select(x => x.Name);
         var message = string.Join(", ", next3CardNames);
-        await JS.InvokeVoidAsync("Alert", message);
+        await JS.InvokeVoidAsync("showAlert", message);
     }
 
     public void HandleKeyPress(KeyboardEventArgs args)

@@ -7,11 +7,8 @@
 }
 
 .buttons-container {
-    display: inline-flex
-}
-
-.buttons-container button {
-    margin-right: 0.3rem;
+    display: inline-flex;
+    gap: 0.3rem;
 }
 
 .bomb {
