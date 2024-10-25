@@ -1,5 +1,5 @@
-﻿<section class="@BombClass(Model.Type)">
-    <div class="buttons-container">
+﻿<div class="@BombClass(Model.Type) container">
+    <div class="flex">
         @if (Model.CanBeDiscarded())
         {
             <button @onclick="Model.Discard" title="Défausser">D</button>
@@ -24,4 +24,4 @@
     </div>
 
     <h3>@Model.Name</h3>
-</section>
+</div>

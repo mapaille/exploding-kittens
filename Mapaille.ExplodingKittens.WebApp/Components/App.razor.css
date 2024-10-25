@@ -7,8 +7,14 @@
 
 ::deep button, ::deep input {
     border: none;
-    border-radius: 0;
-    padding: 0.6rem;
+    border-radius: 0.2rem;
+    padding: 0.8rem;
     background-color: #F3F3F3;
     color: black;
+}
+
+::deep .flex {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
 }

@@ -3,39 +3,37 @@
 
 @if (IsAuthenticated)
 {
-    <div class="container">
-        <section>
-            <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
-            <button @onclick="SelectPlayerA">Marc</button>
-            <button @onclick="SelectPlayerB">Estelle</button>
-        </section>
-
-        <h3>Mes cartes</h3>
-
-        @if (IsPlayerA())
-        {
-            <Player Model="@Model.PlayerA" />
-        }
-
-        @if (IsPlayerB())
-        {
-            <Player Model="@Model.PlayerB" />
-        }
-
-        <h3>Pile de cartes</h3>
-        
-        <button @onclick="SeeTheFuture">Voir le futur</button>
-
-        <p>Cartes restantes: @Model.Cards.Count</p>
-
-        <h3>Cartes défaussées</h3>
-        <CardDeck Cards="@Model.DiscardedCards" />
+    <div class="flex">
+        <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
+        <button @onclick="SelectPlayerA">Marc</button>
+        <button @onclick="SelectPlayerB">Estelle</button>
     </div>
+
+    <h3>Mes cartes</h3>
+
+    @if (IsPlayerA())
+    {
+        <Player Model="@Model.PlayerA" />
+    }
+
+    @if (IsPlayerB())
+    {
+        <Player Model="@Model.PlayerB" />
+    }
+
+    <h3>Pile de cartes</h3>
+        
+    <button @onclick="SeeTheFuture">Voir le futur</button>
+
+    <p>Cartes restantes: @Model.Cards.Count</p>
+
+    <h3>Cartes défaussées</h3>
+    <CardDeck Cards="@Model.DiscardedCards" />
 }
 
 else
 {
-    <div class="container">
+    <div class="flex">
         <InputText @bind-Value="SecretPhrase" @onkeyup="HandleKeyPress" />
         <button @onclick="Authenticate">Jouer</button>
     </div>
