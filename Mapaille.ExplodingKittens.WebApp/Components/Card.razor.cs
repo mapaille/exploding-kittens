@@ -9,13 +9,12 @@ public partial class Card
     [EditorRequired]
     public required CardModel Model { get; set; }
 
-    public string BombClass(CardType cardType)
+    public string CardTypeClass(CardType cardType)
     {
-        if (cardType == CardType.ExplodingKitten)
+        return cardType switch
         {
-            return "bomb";
-        }
-
-        return string.Empty;
+            CardType.ExplodingKitten => "exploding-kitten",
+            _ => string.Empty,
+        };
     }
 }

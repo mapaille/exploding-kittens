@@ -9,7 +9,7 @@
         <button @onclick="SelectPlayerB">Estelle</button>
     </div>
 
-    <h3>Mes cartes</h3>
+    <h3 class="color-white">Mes cartes</h3>
 
     @if (IsPlayerA())
     {
@@ -21,13 +21,13 @@
         <Player Model="@Model.PlayerB" />
     }
 
-    <h3>Pile de cartes</h3>
+    <h3 class="color-white">Pile de cartes</h3>
         
     <button @onclick="SeeTheFuture">Voir le futur</button>
 
-    <p>Cartes restantes: @Model.Cards.Count</p>
+    <p class="color-white">Cartes restantes: @Model.Cards.Count</p>
 
-    <h3>Cartes défaussées</h3>
+    <h3 class="color-white">Cartes défaussées</h3>
     <CardDeck Cards="@Model.DiscardedCards" />
 }
 

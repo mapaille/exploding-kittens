@@ -1,0 +1,6 @@
+﻿@inject VersionService versionService;
+
+@using Services;
+
+<script src="scripts.js?v=@(versionService.Version)"></script>
+<script src="_framework/blazor.web.js?v=@(versionService.Version)"></script>
