@@ -41,8 +41,6 @@ jobs:
           registryPassword: ${{ secrets.EXPLODINGKITTENS_REGISTRY_PASSWORD }}
           containerAppName: exploding-kittens
           resourceGroup: exploding-kittens
-          builderStack: debian-bullseye
-          runtimeStack: dotnetcore:8.0
           imageToBuild: mapaille.azurecr.io/exploding-kittens:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
