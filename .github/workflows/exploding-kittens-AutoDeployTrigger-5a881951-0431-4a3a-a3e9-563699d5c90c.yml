@@ -39,7 +39,6 @@ jobs:
           registryUsername: ${{ secrets.EXPLODINGKITTENS_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.EXPLODINGKITTENS_REGISTRY_PASSWORD }}
           containerAppName: exploding-kittens
-          containerAppEnvironment: exploding-kittens
           resourceGroup: exploding-kittens
           dockerfilePath: Mapaille.ExplodingKittens.WebApp/Dockerfile
           imageToBuild: mapaille.azurecr.io/exploding-kittens:${{ github.sha }}
