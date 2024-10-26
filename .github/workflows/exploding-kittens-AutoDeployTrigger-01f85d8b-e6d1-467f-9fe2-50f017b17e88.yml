@@ -36,11 +36,11 @@ jobs:
         with:
           appSourcePath: ${{ github.workspace }}
           _dockerfilePathKey_: _dockerfilePath_
-          registryUrl: 
           registryUsername: ${{ secrets.EXPLODINGKITTENS_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.EXPLODINGKITTENS_REGISTRY_PASSWORD }}
           containerAppName: exploding-kittens
           resourceGroup: exploding-kittens
+          targetPort: 443
           imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
