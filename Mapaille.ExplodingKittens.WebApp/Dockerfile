@@ -16,12 +16,12 @@ COPY ["Mapaille.ExplodingKittens.WebApp/Mapaille.ExplodingKittens.WebApp.csproj"
 RUN dotnet restore "./Mapaille.ExplodingKittens.WebApp/Mapaille.ExplodingKittens.WebApp.csproj"
 COPY . .
 WORKDIR "/src/Mapaille.ExplodingKittens.WebApp"
-RUN dotnet build "./Mapaille.ExplodingKittens.WebApp.csproj" -c $BUILD_CONFIGURATION -o /app/build --no-restore
+RUN dotnet build "./Mapaille.ExplodingKittens.WebApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Mapaille.ExplodingKittens.WebApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-build
+RUN dotnet publish "./Mapaille.ExplodingKittens.WebApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
