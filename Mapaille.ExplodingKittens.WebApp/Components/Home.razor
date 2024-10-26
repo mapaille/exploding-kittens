@@ -1,0 +1,13 @@
+﻿@page "/"
+
+@if (IsAuthenticated)
+{
+    <Game />
+}
+else
+{
+    <EditForm class="flex" Model="this" OnSubmit="Authenticate" FormName="Login">
+        <InputText @bind-Value="SecretPhrase" />
+        <button type="submit">Jouer</button>
+    </EditForm>
+}

@@ -1,40 +1,28 @@
 ﻿@rendermode InteractiveServer
-@page "/"
 
-@if (IsAuthenticated)
+<div class="flex">
+    <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
+    <button @onclick="SelectPlayerA">Marc</button>
+    <button @onclick="SelectPlayerB">Estelle</button>
+</div>
+
+<h3 class="color-white">Mes cartes</h3>
+
+@if (IsPlayerA())
 {
-    <div class="flex">
-        <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
-        <button @onclick="SelectPlayerA">Marc</button>
-        <button @onclick="SelectPlayerB">Estelle</button>
-    </div>
+    <Player Model="@Model.PlayerA" />
+}
 
-    <h3 class="color-white">Mes cartes</h3>
+@if (IsPlayerB())
+{
+    <Player Model="@Model.PlayerB" />
+}
 
-    @if (IsPlayerA())
-    {
-        <Player Model="@Model.PlayerA" />
-    }
-
-    @if (IsPlayerB())
-    {
-        <Player Model="@Model.PlayerB" />
-    }
-
-    <h3 class="color-white">Pile de cartes</h3>
+<h3 class="color-white">Pile de cartes</h3>
         
-    <button @onclick="SeeTheFuture">Voir le futur</button>
+<button @onclick="SeeTheFuture">Voir le futur</button>
 
-    <p class="color-white">Cartes restantes: @Model.Cards.Count</p>
+<p class="color-white">Cartes restantes: @Model.Cards.Count</p>
 
-    <h3 class="color-white">Cartes défaussées</h3>
-    <CardDeck Cards="@Model.DiscardedCards" />
-}
-
-else
-{
-    <div class="flex">
-        <InputText @bind-Value="SecretPhrase" @onkeyup="HandleKeyPress" />
-        <button @onclick="Authenticate">Jouer</button>
-    </div>
-}
+<h3 class="color-white">Cartes défaussées</h3>
+<CardDeck Cards="@Model.DiscardedCards" />

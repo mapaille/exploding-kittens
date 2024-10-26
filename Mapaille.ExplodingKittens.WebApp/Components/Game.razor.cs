@@ -1,6 +1,5 @@
 ﻿using Mapaille.ExplodingKittens.WebApp.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
@@ -29,29 +28,6 @@ public partial class Game : IAsyncDisposable
         var next3CardNames = Model.Cards.Take(3).Select(x => x.Name);
         var message = string.Join(", ", next3CardNames);
         await JS.InvokeVoidAsync("showAlert", message);
-    }
-
-    public void HandleKeyPress(KeyboardEventArgs args)
-    {
-        if (args.Code == "Enter")
-        {
-            Authenticate();
-        }
-    }
-
-    public void Authenticate()
-    {
-        if (SecretPhrase?.Equals("marc-estelle", StringComparison.InvariantCultureIgnoreCase) == true)
-        {
-            IsAuthenticated = true;
-        }
-        else
-        {
-            IsAuthenticated = false;
-            SecretPhrase = null;
-        }
-
-        StateHasChanged();
     }
 
     private async void UpdateState(object? sender, EventArgs args)

@@ -6,9 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddRazorComponents();
+
 builder.Services.AddSingleton<VersionService>();
 
+
 var app = builder.Build();
+
+
+if (!builder.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
 
 app.UseStaticFiles();
 app.UseAntiforgery();
