@@ -7,19 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="wwwroot\scripts.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\scripts.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DartSassBuilder" Version="1.1.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.6.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>
