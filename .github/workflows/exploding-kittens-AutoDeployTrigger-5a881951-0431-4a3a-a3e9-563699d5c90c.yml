@@ -35,14 +35,11 @@ jobs:
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
-          _dockerfilePathKey_: _dockerfilePath_
           registryUrl: mapaille.azurecr.io
           registryUsername: ${{ secrets.EXPLODINGKITTENS_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.EXPLODINGKITTENS_REGISTRY_PASSWORD }}
           containerAppName: exploding-kittens
+          containerAppEnvironment: exploding-kittens
           resourceGroup: exploding-kittens
+          dockerfilePath: Mapaille.ExplodingKittens.WebApp/Dockerfile
           imageToBuild: mapaille.azurecr.io/exploding-kittens:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
-
-
