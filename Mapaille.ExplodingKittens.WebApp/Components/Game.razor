@@ -13,6 +13,8 @@
     }
 </div>
 
+<h3 class="color-white">@Model.Cards.Count cartes restantes</h3>
+
 @if (IsPlayerA())
 {
     <Player Model="@Model.PlayerA" />
@@ -23,7 +25,6 @@
     <Player Model="@Model.PlayerB" />
 }
 
-<h3 class="color-white">Pile de cartes (@Model.Cards.Count cartes restantes)</h3>
-
 <h3 class="color-white">Cartes défaussées</h3>
+
 <CardDeck Cards="@Model.DiscardedCards" />
