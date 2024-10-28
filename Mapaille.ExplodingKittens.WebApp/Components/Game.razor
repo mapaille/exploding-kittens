@@ -2,8 +2,8 @@
 
 <div class="flex">
     <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
-    <button @onclick="SelectPlayerA">Marc</button>
-    <button @onclick="SelectPlayerB">Estelle</button>
+    <button class="@GetActivePlayerClass(Player, Model.PlayerA)" @onclick="SelectPlayerA">Marc</button>
+    <button class="@GetActivePlayerClass(Player, Model.PlayerB)" @onclick="SelectPlayerB">Estelle</button>
 
     @if (Player != null)
     {

@@ -30,6 +30,16 @@ public partial class Game : IAsyncDisposable
         await JS.InvokeVoidAsync("showAlert", message);
     }
 
+    public string GetActivePlayerClass(PlayerModel? player, PlayerModel target)
+    {
+        if (player == target)
+        {
+            return "active";
+        }
+
+        return string.Empty;
+    }
+
     private async void UpdateState(object? sender, EventArgs args)
     {
         await InvokeAsync(StateHasChanged);
@@ -37,13 +47,29 @@ public partial class Game : IAsyncDisposable
 
     public void SelectPlayerA()
     {
-        Player = Model.PlayerA;
+        if (IsPlayerA())
+        {
+            Player = null;
+        }
+        else
+        {
+            Player = Model.PlayerA;
+        }
+
         StateHasChanged();
     }
 
     public void SelectPlayerB()
     {
-        Player = Model.PlayerB;
+        if (IsPlayerB())
+        {
+            Player = null;
+        }
+        else
+        {
+            Player = Model.PlayerB;
+        }
+
         StateHasChanged();
     }
 
