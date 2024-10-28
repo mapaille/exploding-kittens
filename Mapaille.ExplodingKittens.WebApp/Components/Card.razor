@@ -15,10 +15,9 @@
             <button @onclick="Model.PutBackInPile" title="Remettre dans la pile">R</button>
         }
 
-        @if (Model.CanBeGiven())
+        @if (ActivePlayer != null && ActivePlayer.CanTakeCard(Model))
         {
-            <button @onclick="Model.GiveToPlayerA" title="Transférer à Marc">M</button>
-            <button @onclick="Model.GiveToPlayerB" title="Transférer à Estelle">E</button>
+            <button @onclick="() => ActivePlayer.TakeCard(Model)" title="Ramasser">R</button>
         }
 
     </div>

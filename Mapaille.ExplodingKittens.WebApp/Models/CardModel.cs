@@ -1,4 +1,5 @@
 ﻿using Mapaille.ExplodingKittens.WebApp.Extensions;
+using Microsoft.AspNetCore.Components;
 
 namespace Mapaille.ExplodingKittens.WebApp.Models;
 
@@ -45,7 +46,7 @@ public abstract record CardModel
         return IsDiscarded;
     }
 
-    public async void GiveToPlayerA()
+    public async void GiveToPlayer(PlayerModel player)
     {
         await _game.SafeUpdateAsync(() =>
         {
@@ -53,22 +54,7 @@ public abstract record CardModel
 
             if (removedFromDiscardedCards)
             {
-                _game.PlayerA.Cards.Add(this);
-            }
-
-            return ValueTask.CompletedTask;
-        });
-    }
-
-    public async void GiveToPlayerB()
-    {
-        await _game.SafeUpdateAsync(() =>
-        {
-            var removedFromDiscardedCards = _game.DiscardedCards.Remove(this);
-
-            if (removedFromDiscardedCards)
-            {
-                _game.PlayerB.Cards.Add(this);
+                player.Cards.Add(this);
             }
 
             return ValueTask.CompletedTask;

@@ -64,4 +64,22 @@ public record PlayerModel
             return ValueTask.CompletedTask;
         });
     }
+
+    public bool CanTakeCard(CardModel card)
+    {
+        return _gameModel.Cards.FirstOrDefault() == card || _gameModel.DiscardedCards.Contains(card);
+    }
+
+    public async void TakeCard(CardModel card)
+    {
+        await _gameModel.SafeUpdateAsync(() =>
+        {
+            if ((_gameModel.Cards.FirstOrDefault() == card && _gameModel.Cards.Remove(card)) || _gameModel.DiscardedCards.Remove(card))
+            {
+                Cards.Add(card);
+            }
+
+            return ValueTask.CompletedTask;
+        });
+    }
 }

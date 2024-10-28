@@ -9,6 +9,9 @@ public partial class Card
     [EditorRequired]
     public required CardModel Model { get; set; }
 
+    [Parameter]
+    public required PlayerModel? ActivePlayer { get; set; }
+
     public string CardTypeClass(CardType cardType)
     {
         return cardType switch
