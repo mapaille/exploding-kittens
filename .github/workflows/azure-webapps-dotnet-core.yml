@@ -13,6 +13,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: ./Mapaille.ExplodingKittens.WebApp
+
 jobs:
   build:
     runs-on: ubuntu-latest
