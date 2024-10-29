@@ -37,8 +37,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
+      - name: dotnet restore
+        run: dotner restore -r linux-musl-x64
+
       - name: Build with dotnet
-        run: dotnet build -c Release -r linux-musl-x64
+        run: dotnet build -c Release -r linux-musl-x64 --no-restore
 
       - name: dotnet publish
         run: dotnet publish -c Release -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishDir=${{env.DOTNET_ROOT}}/myapp --no-build
