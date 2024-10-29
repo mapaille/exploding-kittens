@@ -120,7 +120,7 @@ public abstract record CardModel
 
             if (Type == CardType.Shuffle)
             {
-                _game.Cards.Shuffle();
+                _game.Cards = _game.Cards.Shuffle();
             }
 
             return ValueTask.CompletedTask;

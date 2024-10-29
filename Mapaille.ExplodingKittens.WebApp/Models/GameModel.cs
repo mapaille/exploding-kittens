@@ -14,7 +14,7 @@ public class GameModel
         PlayerB = new(this);
     }
 
-    public List<CardModel> Cards { get; } = [];
+    public List<CardModel> Cards { get; set; } = [];
     public List<CardModel> DiscardedCards { get; } = [];
 
     public PlayerModel PlayerA { get; }
