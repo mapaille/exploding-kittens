@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: dotnet restore
-        run: dotner restore -r linux-musl-x64
+        run: dotnet restore -r linux-musl-x64
 
       - name: Build with dotnet
         run: dotnet build -c Release -r linux-musl-x64 --no-restore
