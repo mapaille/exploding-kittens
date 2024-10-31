@@ -44,13 +44,13 @@ jobs:
         run: dotnet build -c Release -r linux-musl-x64 --no-restore
 
       - name: dotnet publish
-        run: dotnet publish -c Release -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true -p:PublishDir=${{env.DOTNET_ROOT}}/myapp --no-build
+        run: dotnet publish -c Release -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true -p:PublishDir=${{ env.DOTNET_ROOT }}/myapp --no-build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ env.DOTNET_ROOT }}/myapp
 
   deploy:
     permissions:
