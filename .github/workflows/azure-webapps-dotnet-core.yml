@@ -59,7 +59,7 @@ jobs:
     needs: build
     environment:
       name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: https://exploding-kittens.mapaille.net
 
     steps:
       - name: Download artifact from build job
@@ -68,7 +68,6 @@ jobs:
           name: .net-app
 
       - name: Deploy to Azure Web App
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
