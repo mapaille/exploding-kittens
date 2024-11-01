@@ -27,6 +27,7 @@ button, input {
 
 .card {
     background-color: #7a826d;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -38,7 +39,7 @@ button, input {
 }
 
 .exploding-kitten {
-    background-image: url('images/card_exploding_kitten.png');
+    background-image: url('images/card_exploding_kitten.jpg');
 }
 
 .cat-1 {
