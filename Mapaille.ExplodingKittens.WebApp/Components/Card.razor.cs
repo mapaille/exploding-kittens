@@ -17,6 +17,7 @@ public partial class Card
         return cardType switch
         {
             CardType.ExplodingKitten => "exploding-kitten",
+            CardType.Cat => $"cat-{((CatCardModel)Model).Number}",
             _ => string.Empty,
         };
     }

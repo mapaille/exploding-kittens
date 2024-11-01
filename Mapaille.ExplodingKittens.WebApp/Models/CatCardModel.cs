@@ -12,4 +12,6 @@ public record CatCardModel : CardModel
     public override CardType Type => CardType.Cat;
 
     public override string Name => $"Chat {_number}";
+
+    public int Number => _number;
 }
