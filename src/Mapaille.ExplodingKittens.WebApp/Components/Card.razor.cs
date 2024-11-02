@@ -1,8 +1,4 @@
-﻿using Mapaille.ExplodingKittens.Game.Models;
-using Microsoft.AspNetCore.Components;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Mapaille.ExplodingKittens.WebApp.Components;
+﻿namespace Mapaille.ExplodingKittens.WebApp.Components;
 
 public partial class Card
 {

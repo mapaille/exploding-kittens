@@ -1,7 +1,4 @@
-﻿using Mapaille.ExplodingKittens.Game.Models;
-using Microsoft.AspNetCore.Components;
-
-namespace Mapaille.ExplodingKittens.WebApp.Components;
+﻿namespace Mapaille.ExplodingKittens.WebApp.Components;
 
 public partial class CardDeck
 {

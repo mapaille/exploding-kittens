@@ -1,7 +1,3 @@
-using Mapaille.ExplodingKittens.Game.Models;
-using Mapaille.ExplodingKittens.WebApp.Components;
-using Mapaille.ExplodingKittens.WebApp.Services;
-
 var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.Services.AddRazorComponents()
