@@ -29,14 +29,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Set up dependency caching for faster builds
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget
-
       - name: dotnet restore
         run: dotnet restore -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true
 
