@@ -1,14 +1,14 @@
 ﻿@rendermode InteractiveServer
 
 <div class="flex">
-    <button @onclick="Model.ReinitializeAsync">Réinitialiser</button>
+    <button @onclick="Model.ResetAsync">Réinitialiser</button>
     <button class="@GetActivePlayerClass(Player, Model.PlayerA)" @onclick="SelectPlayerA">Marc</button>
     <button class="@GetActivePlayerClass(Player, Model.PlayerB)" @onclick="SelectPlayerB">Estelle</button>
 
     @if (Player != null)
     {
-        <button @onclick="Player.TakeCard">Piger</button>
-        <button @onclick="Player.StealCard">Voler</button>
+        <button @onclick="() => Player.PickCard(Model)">Piger</button>
+        <button @onclick="() => Player.StealCard(Model)">Voler</button>
         <button @onclick="SeeTheFuture">Voir le futur</button>
     }
 </div>

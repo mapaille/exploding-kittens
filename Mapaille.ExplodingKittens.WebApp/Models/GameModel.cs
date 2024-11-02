@@ -2,92 +2,68 @@
 
 namespace Mapaille.ExplodingKittens.WebApp.Models;
 
-public class GameModel
+public class GameModel([FromKeyedServices("PlayerA")] PlayerModel playerA, [FromKeyedServices("PlayerB")] PlayerModel playerB)
 {
-    public static event EventHandler? OnUpdate;
+    public event EventHandler? OnUpdate;
 
     private readonly SemaphoreSlim _semaphore = new(1, 1);
-
-    public GameModel()
-    {
-        PlayerA = new(this);
-        PlayerB = new(this);
-    }
 
     public List<CardModel> Cards { get; set; } = [];
     public List<CardModel> DiscardedCards { get; } = [];
 
-    public PlayerModel PlayerA { get; }
-    public PlayerModel PlayerB { get; }
+    public PlayerModel PlayerA { get; } = playerA;
+    public PlayerModel PlayerB { get; } = playerB;
 
-    public async Task ReinitializeAsync()
+    public async Task ResetAsync()
     {
         await SafeUpdateAsync(() =>
         {
-            CollectCards();
+            ClearCards();
             PassCards();
-            return ValueTask.CompletedTask;
         });
+    }
+
+    public async Task SafeUpdateAsync(Action action)
+    {
+        await _semaphore.WaitAsync();
+
+        try
+        {
+            action();
+        }
+        catch
+        {
+            //TODO Restore previous state.
+        }
+        finally
+        {
+            OnUpdate?.Invoke(this, new EventArgs());
+            //Save state.
+            _semaphore.Release();
+        }
     }
 
     private void PassCards()
     {
         var cards = new List<CardModel>();
 
-        PlayerA.Cards.Add(new DefuseCardModel(this));
-        PlayerB.Cards.Add(new DefuseCardModel(this));
+        PlayerA.Cards.Add(new DefuseCardModel());
+        PlayerB.Cards.Add(new DefuseCardModel());
 
-        var cardsToPass = new List<CardModel>
-        {
-            new DefuseCardModel(this),
-            new DefuseCardModel(this),
-            new AttackCardModel(this),
-            new AttackCardModel(this),
-            new AttackCardModel(this),
-            new AttackCardModel(this),
-            new FavorCardModel(this),
-            new FavorCardModel(this),
-            new FavorCardModel(this),
-            new FavorCardModel(this),
-            new NopeCardModel(this),
-            new NopeCardModel(this),
-            new NopeCardModel(this),
-            new NopeCardModel(this),
-            new NopeCardModel(this),
-            new ShuffleCardModel(this),
-            new ShuffleCardModel(this),
-            new ShuffleCardModel(this),
-            new ShuffleCardModel(this),
-            new SkipCardModel(this),
-            new SkipCardModel(this),
-            new SkipCardModel(this),
-            new SkipCardModel(this),
-            new DivinationCardModel(this),
-            new DivinationCardModel(this),
-            new DivinationCardModel(this),
-            new DivinationCardModel(this),
-            new DivinationCardModel(this),
-            new CatCardModel(this, 1),
-            new CatCardModel(this, 1),
-            new CatCardModel(this, 1),
-            new CatCardModel(this, 1),
-            new CatCardModel(this, 2),
-            new CatCardModel(this, 2),
-            new CatCardModel(this, 2),
-            new CatCardModel(this, 2),
-            new CatCardModel(this, 3),
-            new CatCardModel(this, 3),
-            new CatCardModel(this, 3),
-            new CatCardModel(this, 3),
-            new CatCardModel(this, 4),
-            new CatCardModel(this, 4),
-            new CatCardModel(this, 4),
-            new CatCardModel(this, 4),
-            new CatCardModel(this, 5),
-            new CatCardModel(this, 5),
-            new CatCardModel(this, 5),
-            new CatCardModel(this, 5)
-        };
+        var cardsToPass = new List<CardModel>();
+
+        cardsToPass.AddRange(CreateManyCards<DefuseCardModel>(2));
+        cardsToPass.AddRange(CreateManyCards<AttackCardModel>(4));
+        cardsToPass.AddRange(CreateManyCards<FavorCardModel>(4));
+        cardsToPass.AddRange(CreateManyCards<NopeCardModel>(5));
+        cardsToPass.AddRange(CreateManyCards<ShuffleCardModel>(4));
+        cardsToPass.AddRange(CreateManyCards<SkipCardModel>(4));
+        cardsToPass.AddRange(CreateManyCards<DivinationCardModel>(5));
+        cardsToPass.AddRange(CreateManyCatCards(4, 1));
+        cardsToPass.AddRange(CreateManyCatCards(4, 2));
+        cardsToPass.AddRange(CreateManyCatCards(4, 3));
+        cardsToPass.AddRange(CreateManyCatCards(4, 4));
+        cardsToPass.AddRange(CreateManyCatCards(4, 4));
 
         cardsToPass = cardsToPass.Shuffle();
 
@@ -113,7 +89,7 @@ public class GameModel
             cards.Add(cardsToPass.ElementAt(i));
         }
 
-        cards.Add(new ExplodingKittenCardModel(this));
+        cards.Add(new ExplodingKittenCardModel());
 
         cards = cards.Shuffle();
 
@@ -123,7 +99,7 @@ public class GameModel
         }
     }
 
-    private void CollectCards()
+    private void ClearCards()
     {
         Cards.Clear();
         DiscardedCards.Clear();
@@ -131,18 +107,20 @@ public class GameModel
         PlayerB.Cards.Clear();
     }
 
-    public async Task SafeUpdateAsync(Func<ValueTask> func)
+    private static IEnumerable<TCardModel> CreateManyCards<TCardModel>(int count)
+        where TCardModel : CardModel, new()
     {
-        await _semaphore.WaitAsync();
-
-        try
+        for (var i = 0; i < count; i++)
         {
-            await func();
+            yield return new TCardModel();
         }
-        finally
+    }
+
+    private static IEnumerable<CatCardModel> CreateManyCatCards(int count, int number)
+    {
+        for (var i = 0; i < count; i++)
         {
-            OnUpdate?.Invoke(this, new EventArgs());
-            _semaphore.Release();
+            yield return new CatCardModel(number);
         }
     }
 }

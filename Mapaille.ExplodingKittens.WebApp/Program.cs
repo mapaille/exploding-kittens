@@ -1,4 +1,5 @@
 using Mapaille.ExplodingKittens.WebApp.Components;
+using Mapaille.ExplodingKittens.WebApp.Models;
 using Mapaille.ExplodingKittens.WebApp.Services;
 
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -8,6 +9,9 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddRazorComponents();
 
+builder.Services.AddSingleton<GameModel>();
+builder.Services.AddKeyedSingleton<PlayerModel>("PlayerA");
+builder.Services.AddKeyedSingleton<PlayerModel>("PlayerB");
 builder.Services.AddSingleton<VersionService>();
 
 var app = builder.Build();

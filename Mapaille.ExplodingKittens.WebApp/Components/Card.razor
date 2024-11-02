@@ -1,25 +1,27 @@
 ﻿<div class="card @CardTypeClass(Model.Type)">
     <div class="flex">
-        @if (Model.CanBeDiscarded())
+        @if (ActivePlayer != null)
         {
-            <button @onclick="Model.Discard" title="Défausser">D</button>
-        }
+            if (ActivePlayer.CanDiscardCard(Model))
+            {
+                <button @onclick="() => ActivePlayer.DiscardCard(Game, Model)" title="Défausser">D</button>
+            }
 
-        @if (Model.CanBeTransferred())
-        {
-            <button @onclick="Model.Transfer" title="Transférer à l'autre joueur">T</button>
-        }
+            if (ActivePlayer.CanGiveCard(Model))
+            {
+                <button @onclick="() => ActivePlayer.GiveCard(Game, Model)" title="Transférer à l'autre joueur">T</button>
+            }
 
-        @if (Model.CanBePutBackInPile())
-        {
-            <button @onclick="Model.PutBackInPile" title="Remettre dans la pile">R</button>
-        }
+            if (ActivePlayer.CanPutCardBackInPile(Model))
+            {
+                <button @onclick="() => ActivePlayer.PutCardBackInPile(Game, Model)" title="Remettre dans la pile">R</button>
+            }
 
-        @if (ActivePlayer != null && ActivePlayer.CanTakeCard(Model))
-        {
-            <button @onclick="() => ActivePlayer.TakeCard(Model)" title="Ramasser">R</button>
+            if (ActivePlayer.CanPickCard(Game, Model))
+            {
+                <button @onclick="() => ActivePlayer.PickCard(Game, Model)" title="Ramasser">R</button>
+            }
         }
-
     </div>
 
     <h3>@Model.Name</h3>

@@ -1,6 +1,6 @@
 ﻿namespace Mapaille.ExplodingKittens.WebApp.Models;
 
-public record DefuseCardModel(GameModel game) : CardModel(game)
+public record DefuseCardModel : CardModel
 {
     public override CardType Type => CardType.Defuse;
 

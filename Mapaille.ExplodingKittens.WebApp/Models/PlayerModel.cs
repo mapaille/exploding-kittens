@@ -2,41 +2,45 @@
 
 namespace Mapaille.ExplodingKittens.WebApp.Models;
 
-public record PlayerModel
+public class PlayerModel
 {
-    public readonly GameModel _gameModel;
-
-    public PlayerModel(GameModel gameModel)
-    {
-        _gameModel = gameModel;
-    }
+    public Guid Id { get; } = Guid.NewGuid();
 
     public List<CardModel> Cards { get; } = [];
 
-    public Guid Id { get; } = Guid.NewGuid();
-
-    public async void StealCard()
+    public async void PutCardBackInPile(GameModel game, CardModel card)
     {
-        await _gameModel.SafeUpdateAsync(() =>
+        await game.SafeUpdateAsync(() =>
+        {
+            if (Cards.Remove(card))
+            {
+                game.Cards.InsertRandomly(card);
+            }
+        });
+    }
+
+    public async void StealCard(GameModel game)
+    {
+        await game.SafeUpdateAsync(() =>
         {
             CardModel? card = null;
 
-            if (_gameModel.PlayerA == this)
+            if (game.PlayerA == this)
             {
-                card = _gameModel.PlayerB.Cards.Shuffle().FirstOrDefault();
+                card = game.PlayerB.Cards.Shuffle().FirstOrDefault();
 
                 if (card != null)
                 {
-                    _gameModel.PlayerB.Cards.Remove(card);
+                    game.PlayerB.Cards.Remove(card);
                 }
             }
             else
             {
-                card = _gameModel.PlayerA.Cards.Shuffle().FirstOrDefault();
+                card = game.PlayerA.Cards.Shuffle().FirstOrDefault();
 
                 if (card != null)
                 {
-                    _gameModel.PlayerA.Cards.Remove(card);
+                    game.PlayerA.Cards.Remove(card);
                 }
             }
 
@@ -44,42 +48,81 @@ public record PlayerModel
             {
                 Cards.Add(card);
             }
-
-            return ValueTask.CompletedTask;
         });
     }
 
-    public async void TakeCard()
+    public async void PickCard(GameModel game)
     {
-        await _gameModel.SafeUpdateAsync(() =>
+        await game.SafeUpdateAsync(() =>
         {
-            var card = _gameModel.Cards.FirstOrDefault();
-
-            if (card != null)
-            {
-                _gameModel.Cards.Remove(card);
-                Cards.Add(card);
-            }
-
-            return ValueTask.CompletedTask;
+            var card = game.Cards.First();
+            game.Cards.Remove(card);
+            Cards.Add(card);
         });
     }
 
-    public bool CanTakeCard(CardModel card)
+    public async void PickCard(GameModel game, CardModel card)
     {
-        return _gameModel.Cards.FirstOrDefault() == card || _gameModel.DiscardedCards.Contains(card);
-    }
-
-    public async void TakeCard(CardModel card)
-    {
-        await _gameModel.SafeUpdateAsync(() =>
+        await game.SafeUpdateAsync(() =>
         {
-            if ((_gameModel.Cards.FirstOrDefault() == card && _gameModel.Cards.Remove(card)) || _gameModel.DiscardedCards.Remove(card))
+            if (game.Cards.Remove(card) || game.DiscardedCards.Remove(card))
             {
                 Cards.Add(card);
             }
+        });
+    }
 
-            return ValueTask.CompletedTask;
+    public bool CanDiscardCard(CardModel card)
+    {
+        return card.Type != CardType.ExplodingKitten && Cards.Contains(card);
+    }
+
+    public bool CanGiveCard(CardModel card)
+    {
+        return card.Type != CardType.ExplodingKitten && Cards.Contains(card);
+    }
+
+    public bool CanPutCardBackInPile(CardModel card)
+    {
+        return card.Type == CardType.ExplodingKitten && Cards.Contains(card);
+    }
+
+    public bool CanPickCard(GameModel game, CardModel card)
+    {
+        return game.Cards.FirstOrDefault() == card || game.DiscardedCards.Contains(card);
+    }
+
+    public async void GiveCard(GameModel game, CardModel card)
+    {
+        await game.SafeUpdateAsync(() =>
+        {
+            if (Cards.Remove(card))
+            {
+                if (game.PlayerA != this)
+                {
+                    game.PlayerA.Cards.Add(card);
+                }
+                else
+                {
+                    game.PlayerB.Cards.Add(card);
+                }
+            }
+        });
+    }
+
+    public async void DiscardCard(GameModel game, CardModel card)
+    {
+        await game.SafeUpdateAsync(() =>
+        {
+            if (Cards.Remove(card))
+            {
+                game.DiscardedCards.Add(card);
+
+                if (card.Type == CardType.Shuffle)
+                {
+                    game.Cards = game.Cards.Shuffle();
+                }
+            }
         });
     }
 }

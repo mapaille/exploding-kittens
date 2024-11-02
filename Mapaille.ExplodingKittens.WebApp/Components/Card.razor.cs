@@ -1,5 +1,6 @@
 ﻿using Mapaille.ExplodingKittens.WebApp.Models;
 using Microsoft.AspNetCore.Components;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapaille.ExplodingKittens.WebApp.Components;
 
@@ -11,6 +12,10 @@ public partial class Card
 
     [Parameter]
     public required PlayerModel? ActivePlayer { get; set; }
+
+    [Inject]
+    [NotNull]
+    public GameModel? Game { get; set; }
 
     public string CardTypeClass(CardType cardType)
     {

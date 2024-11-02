@@ -7,21 +7,15 @@ namespace Mapaille.ExplodingKittens.WebApp.Components;
 
 public partial class Game : IAsyncDisposable
 {
-    public static GameModel Model { get; } = new();
-    public PlayerModel? Player { get; set; }
-
-    public Game()
-    {
-        GameModel.OnUpdate += UpdateState;
-    }
+    [Inject]
+    [NotNull]
+    public GameModel? Model { get; set; }
 
     [Inject]
     [NotNull]
     public IJSRuntime? JS { get; set; }
 
-    public string? SecretPhrase { get; set; }
-
-    public bool IsAuthenticated { get; set; }
+    public PlayerModel? Player { get; set; }
 
     public async Task SeeTheFuture()
     {
@@ -38,6 +32,12 @@ public partial class Game : IAsyncDisposable
         }
 
         return string.Empty;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        Model.OnUpdate += UpdateState;
+        return base.OnInitializedAsync();
     }
 
     private async void UpdateState(object? sender, EventArgs args)
@@ -85,7 +85,7 @@ public partial class Game : IAsyncDisposable
 
     public ValueTask DisposeAsync()
     {
-        GameModel.OnUpdate -= UpdateState;
+        Model.OnUpdate -= UpdateState;
         GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;
     }

@@ -1,6 +1,6 @@
 ﻿namespace Mapaille.ExplodingKittens.WebApp.Models;
 
-public record ExplodingKittenCardModel(GameModel game) : CardModel(game)
+public record ExplodingKittenCardModel : CardModel
 {
     public override CardType Type => CardType.ExplodingKitten;
 

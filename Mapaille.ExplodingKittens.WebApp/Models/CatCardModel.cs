@@ -4,7 +4,7 @@ public record CatCardModel : CardModel
 {
     private readonly int _number;
 
-    public CatCardModel(GameModel game, int number) : base(game)
+    public CatCardModel(int number)
     {
         _number = number;
     }
