@@ -29,14 +29,9 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         {
             action();
         }
-        catch
-        {
-            //TODO Restore previous state.
-        }
         finally
         {
             OnUpdate?.Invoke(this, new EventArgs());
-            //Save state.
             _semaphore.Release();
         }
     }

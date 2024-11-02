@@ -6,18 +6,15 @@ public record CardModel
     {
         Id = Guid.NewGuid();
         Type = type;
-        Name = GetName(type);
     }
 
     public Guid Id { get; }
 
     public CardType Type { get; }
 
-    public string Name { get; }
-
-    private static string GetName(CardType type)
+    public string GetName()
     {
-        return type switch
+        return Type switch
         {
             CardType.ExplodingKitten => "Chaton explosif",
             CardType.Defuse => "Kit de désamorçage",
@@ -32,7 +29,7 @@ public record CardModel
             CardType.Cat3 => "Chat 3",
             CardType.Cat4 => "Chat 4",
             CardType.Cat5 => "Chat 5",
-            _ => throw new ArgumentOutOfRangeException(nameof(type))
+            _ => string.Empty
         };
     }
 }

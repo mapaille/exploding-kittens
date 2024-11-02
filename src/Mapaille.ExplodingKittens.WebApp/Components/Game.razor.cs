@@ -19,7 +19,7 @@ public partial class Game : IAsyncDisposable
 
     public async Task SeeTheFuture()
     {
-        var next3CardNames = Model.Cards.Take(3).Select(x => x.Name);
+        var next3CardNames = Model.Cards.Take(3).Select(x => x.GetName());
         var message = string.Join(", ", next3CardNames);
         await JS.InvokeVoidAsync("showAlert", message);
     }
