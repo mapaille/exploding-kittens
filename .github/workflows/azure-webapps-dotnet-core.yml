@@ -15,7 +15,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: ./Mapaille.ExplodingKittens.WebApp
+    working-directory: ./src/Mapaille.ExplodingKittens.WebApp
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-nuget-
+            ${{ runner.os }}-nuget
 
       - name: dotnet restore
         run: dotnet restore -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true
