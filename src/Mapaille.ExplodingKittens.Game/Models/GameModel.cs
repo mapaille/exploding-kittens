@@ -1,8 +1,6 @@
-﻿using Mapaille.ExplodingKittens.WebApp.Extensions;
+﻿namespace Mapaille.ExplodingKittens.Game.Models;
 
-namespace Mapaille.ExplodingKittens.WebApp.Models;
-
-public class GameModel([FromKeyedServices("PlayerA")] PlayerModel playerA, [FromKeyedServices("PlayerB")] PlayerModel playerB)
+public class GameModel(PlayerModel playerA, PlayerModel playerB)
 {
     public event EventHandler? OnUpdate;
 

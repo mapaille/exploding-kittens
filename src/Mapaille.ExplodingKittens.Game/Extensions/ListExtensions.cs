@@ -1,6 +1,6 @@
-﻿using Mapaille.ExplodingKittens.WebApp.Models;
+﻿using Mapaille.ExplodingKittens.Game.Models;
 
-namespace Mapaille.ExplodingKittens.WebApp.Extensions;
+namespace Mapaille.ExplodingKittens.Game.Extensions;
 
 public static class ListExtensions
 {

@@ -1,4 +1,4 @@
-﻿using Mapaille.ExplodingKittens.WebApp.Models;
+﻿using Mapaille.ExplodingKittens.Game.Models;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 

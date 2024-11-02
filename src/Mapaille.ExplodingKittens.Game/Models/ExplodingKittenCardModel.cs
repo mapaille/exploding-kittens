@@ -1,4 +1,4 @@
-﻿namespace Mapaille.ExplodingKittens.WebApp.Models;
+﻿namespace Mapaille.ExplodingKittens.Game.Models;
 
 public record ExplodingKittenCardModel : CardModel
 {

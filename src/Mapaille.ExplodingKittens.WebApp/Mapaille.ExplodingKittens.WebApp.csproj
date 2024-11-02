@@ -10,4 +10,8 @@
     <PackageReference Include="DartSassBuilder" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mapaille.ExplodingKittens.Game\Mapaille.ExplodingKittens.Game.csproj" />
+  </ItemGroup>
+
 </Project>

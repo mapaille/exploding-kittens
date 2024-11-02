@@ -7,12 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapaille.ExplodingKittens.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43189096-CF4E-42EA-8DCD-610F829FBD57}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E0CABC65-337F-4825-9F0C-556405BCC034}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E8DDACAE-6817-45CB-A8B3-E5C910C53091}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\azure-webapps-dotnet-core.yml = .github\workflows\azure-webapps-dotnet-core.yml
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapaille.ExplodingKittens.Game", "src\Mapaille.ExplodingKittens.Game\Mapaille.ExplodingKittens.Game.csproj", "{366DF7DB-AC22-43A4-A32C-1D2070534ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,13 +19,17 @@ Global
 		{B393E88A-8771-43A5-BD11-D244F6A56456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B393E88A-8771-43A5-BD11-D244F6A56456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B393E88A-8771-43A5-BD11-D244F6A56456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{366DF7DB-AC22-43A4-A32C-1D2070534ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366DF7DB-AC22-43A4-A32C-1D2070534ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{366DF7DB-AC22-43A4-A32C-1D2070534ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366DF7DB-AC22-43A4-A32C-1D2070534ED8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B393E88A-8771-43A5-BD11-D244F6A56456} = {43189096-CF4E-42EA-8DCD-610F829FBD57}
-		{E8DDACAE-6817-45CB-A8B3-E5C910C53091} = {E0CABC65-337F-4825-9F0C-556405BCC034}
+		{366DF7DB-AC22-43A4-A32C-1D2070534ED8} = {43189096-CF4E-42EA-8DCD-610F829FBD57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {20FCEF8F-27C4-45DF-82B3-CB2573D003DF}

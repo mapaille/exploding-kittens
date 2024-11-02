@@ -1,6 +1,4 @@
-﻿using Mapaille.ExplodingKittens.WebApp.Extensions;
-
-namespace Mapaille.ExplodingKittens.WebApp.Models;
+﻿namespace Mapaille.ExplodingKittens.Game.Models;
 
 public class PlayerModel
 {
