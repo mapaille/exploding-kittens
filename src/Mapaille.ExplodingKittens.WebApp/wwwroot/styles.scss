@@ -19,13 +19,20 @@ button, input {
     font-size: 1rem;
 }
 
-.flex {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
+button.active {
+    background-color: black;
+    color: white;
 }
 
-.card {
+h3.primary {
+    background-color: #e84631;
+    color: white;
+    padding: 0.6rem;
+    width: fit-content;
+    border-radius: 0.2rem;
+}
+
+div.card {
     background-color: #7a826d;
     background-repeat: no-repeat;
     background-position: center;
@@ -35,33 +42,26 @@ button, input {
     width: 8rem;
     height: 10rem;
     color: white;
+
+    &.cat-1 {
+        background-image: url('images/card_cat_1.jpg');
+    }
+
+    &.cat-2 {
+        background-image: url('images/card_cat_2.jpg');
+    }
+
+    &.cat-3 {
+        background-image: url('images/card_cat_3.jpg');
+    }
+
+    &.exploding-kitten {
+        background-image: url('images/card_exploding_kitten.jpg');
+    }
 }
 
-.exploding-kitten {
-    background-image: url('images/card_exploding_kitten.jpg');
-}
-
-.cat-1 {
-    background-image: url('images/card_cat_1.jpg');
-}
-
-.cat-2 {
-    background-image: url('images/card_cat_2.jpg');
-}
-
-.cat-3 {
-    background-image: url('images/card_cat_3.jpg');
-}
-
-.color-white {
-    background-color: #e84631;
-    color: white;
-    padding: 0.6rem;
-    width: fit-content;
-    border-radius: 0.2rem;
-}
-
-.active {
-    background-color: black;
-    color: white;
+div.flex, form.flex {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
 }
