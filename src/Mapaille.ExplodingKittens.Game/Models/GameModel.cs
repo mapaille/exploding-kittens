@@ -45,23 +45,24 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
     {
         var cards = new List<CardModel>();
 
-        PlayerA.Cards.Add(new DefuseCardModel());
-        PlayerB.Cards.Add(new DefuseCardModel());
+        PlayerA.Cards.Add(CardType.Defuse);
+        PlayerB.Cards.Add(CardType.Defuse);
 
-        var cardsToPass = new List<CardModel>();
-
-        cardsToPass.AddRange(CreateManyCards<DefuseCardModel>(2));
-        cardsToPass.AddRange(CreateManyCards<AttackCardModel>(4));
-        cardsToPass.AddRange(CreateManyCards<FavorCardModel>(4));
-        cardsToPass.AddRange(CreateManyCards<NopeCardModel>(5));
-        cardsToPass.AddRange(CreateManyCards<ShuffleCardModel>(4));
-        cardsToPass.AddRange(CreateManyCards<SkipCardModel>(4));
-        cardsToPass.AddRange(CreateManyCards<DivinationCardModel>(5));
-        cardsToPass.AddRange(CreateManyCatCards(4, 1));
-        cardsToPass.AddRange(CreateManyCatCards(4, 2));
-        cardsToPass.AddRange(CreateManyCatCards(4, 3));
-        cardsToPass.AddRange(CreateManyCatCards(4, 4));
-        cardsToPass.AddRange(CreateManyCatCards(4, 4));
+        var cardsToPass = new List<CardModel>
+        {
+            { CardType.Defuse, 2 },
+            { CardType.Attack, 4 },
+            { CardType.Favor, 4 },
+            { CardType.Nope, 5 },
+            { CardType.Shuffle, 4 },
+            { CardType.Skip, 4 },
+            { CardType.Divination, 5 },
+            { CardType.Cat1, 4 },
+            { CardType.Cat2, 4 },
+            { CardType.Cat3, 4 },
+            { CardType.Cat4, 4 },
+            { CardType.Cat5, 4 }
+        };
 
         cardsToPass = cardsToPass.Shuffle();
 
@@ -87,7 +88,7 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
             cards.Add(cardsToPass.ElementAt(i));
         }
 
-        cards.Add(new ExplodingKittenCardModel());
+        cards.Add(CardType.ExplodingKitten);
 
         cards = cards.Shuffle();
 
@@ -103,22 +104,5 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         DiscardedCards.Clear();
         PlayerA.Cards.Clear();
         PlayerB.Cards.Clear();
-    }
-
-    private static IEnumerable<TCardModel> CreateManyCards<TCardModel>(int count)
-        where TCardModel : CardModel, new()
-    {
-        for (var i = 0; i < count; i++)
-        {
-            yield return new TCardModel();
-        }
-    }
-
-    private static IEnumerable<CatCardModel> CreateManyCatCards(int count, int number)
-    {
-        for (var i = 0; i < count; i++)
-        {
-            yield return new CatCardModel(number);
-        }
     }
 }

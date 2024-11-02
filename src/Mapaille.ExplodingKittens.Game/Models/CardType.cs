@@ -10,5 +10,9 @@ public enum CardType
     Skip,
     Divination,
     Nope,
-    Cat
+    Cat1,
+    Cat2,
+    Cat3,
+    Cat4,
+    Cat5
 }
