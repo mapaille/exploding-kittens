@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# CSS
+/src/Mapaille.ExplodingKittens.WebApp/wwwroot/styles.css
