@@ -1,6 +1,6 @@
 ﻿namespace Mapaille.ExplodingKittens.Game.Extensions;
 
-public static class ListExtensions
+internal static class ListExtensions
 {
     private static readonly Random _random = new();
 
