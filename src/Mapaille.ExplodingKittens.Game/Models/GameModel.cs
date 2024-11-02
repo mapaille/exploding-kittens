@@ -64,7 +64,7 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
             { CardType.Cat5, 4 }
         };
 
-        cardsToPass = cardsToPass.Shuffle();
+        cardsToPass.Shuffle();
 
         for (var i = 0; i < cardsToPass.Count; i++)
         {
@@ -89,13 +89,8 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         }
 
         cards.Add(CardType.ExplodingKitten);
-
-        cards = cards.Shuffle();
-
-        foreach (var card in cards)
-        {
-            Cards.Add(card);
-        }
+        cards.Shuffle();
+        Cards.AddRange(cards);
     }
 
     private void ClearCards()

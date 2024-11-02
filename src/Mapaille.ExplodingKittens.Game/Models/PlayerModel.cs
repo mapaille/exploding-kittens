@@ -25,7 +25,7 @@ public class PlayerModel
 
             if (game.PlayerA == this)
             {
-                card = game.PlayerB.Cards.Shuffle().FirstOrDefault();
+                card = game.PlayerB.Cards.GetRandomly();
 
                 if (card != null)
                 {
@@ -34,7 +34,7 @@ public class PlayerModel
             }
             else
             {
-                card = game.PlayerA.Cards.Shuffle().FirstOrDefault();
+                card = game.PlayerA.Cards.GetRandomly();
 
                 if (card != null)
                 {
@@ -118,7 +118,7 @@ public class PlayerModel
 
                 if (card.Type == CardType.Shuffle)
                 {
-                    game.Cards = game.Cards.Shuffle();
+                    game.Cards.Shuffle();
                 }
             }
         });

@@ -2,6 +2,8 @@
 
 public static class ListExtensions
 {
+    private static readonly Random _random = new();
+
     public static void Add(this List<CardModel> source, CardType type)
     {
         source.Add(new CardModel(type));
@@ -15,16 +17,31 @@ public static class ListExtensions
         }
     }
 
-    public static List<CardModel> Shuffle(this List<CardModel> source)
+    public static void Shuffle(this List<CardModel> source)
     {
-        var random = new Random();
-        return [.. source.OrderBy(_ => random.Next())];
+        int n = source.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = _random.Next(n + 1);
+            (source[n], source[k]) = (source[k], source[n]);
+        }
+    }
+
+    public static CardModel? GetRandomly(this List<CardModel> source)
+    {
+        if (source.Count == 0)
+        {
+            return null;
+        }
+
+        int index = _random.Next(source.Count);
+        return source[index];
     }
 
     public static void InsertRandomly<CardModel>(this List<CardModel> source, CardModel item)
     {
-        var random = new Random();
-        int randomIndex = random.Next(0, source.Count + 1);
+        int randomIndex = _random.Next(source.Count + 1);
         source.Insert(randomIndex, item);
     }
 }
