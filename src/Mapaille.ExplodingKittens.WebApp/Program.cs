@@ -2,7 +2,7 @@ using Mapaille.ExplodingKittens.WebApp;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
-builder.Services.AddResponseCaching();
+builder.Services.AddHealthChecks();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -20,6 +20,7 @@ if (!builder.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.UseHealthChecks("/live");
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
