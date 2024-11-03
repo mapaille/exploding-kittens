@@ -1,13 +1,15 @@
+using Mapaille.ExplodingKittens.WebApp;
+
 var builder = WebApplication.CreateSlimBuilder(args);
+
+builder.Services.AddResponseCaching();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddRazorComponents();
-
+builder.Services.AddSingleton<StaticFilesVersion>();
 builder.Services.AddSingleton<GameModel>();
 builder.Services.AddTransient<PlayerModel>();
-builder.Services.AddSingleton<VersionService>();
 
 var app = builder.Build();
 
