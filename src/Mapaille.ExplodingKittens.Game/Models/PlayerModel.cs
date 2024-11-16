@@ -85,7 +85,7 @@ public class PlayerModel
         return card.Type == CardType.ExplodingKitten && Cards.Contains(card);
     }
 
-    public bool CanPickCard(GameModel game, CardModel card)
+    public static bool CanPickCard(GameModel game, CardModel card)
     {
         return game.Cards.FirstOrDefault() == card || game.DiscardedCards.Contains(card);
     }
@@ -94,16 +94,15 @@ public class PlayerModel
     {
         await game.SafeUpdateAsync(() =>
         {
-            if (Cards.Remove(card))
+            if (!Cards.Remove(card)) return;
+            
+            if (game.PlayerA != this)
             {
-                if (game.PlayerA != this)
-                {
-                    game.PlayerA.Cards.Add(card);
-                }
-                else
-                {
-                    game.PlayerB.Cards.Add(card);
-                }
+                game.PlayerA.Cards.Add(card);
+            }
+            else
+            {
+                game.PlayerB.Cards.Add(card);
             }
         });
     }
@@ -112,14 +111,12 @@ public class PlayerModel
     {
         await game.SafeUpdateAsync(() =>
         {
-            if (Cards.Remove(card))
-            {
-                game.DiscardedCards.Add(card);
+            if (!Cards.Remove(card)) return;
+            game.DiscardedCards.Add(card);
 
-                if (card.Type == CardType.Shuffle)
-                {
-                    game.Cards.Shuffle();
-                }
+            if (card.Type == CardType.Shuffle)
+            {
+                game.Cards.Shuffle();
             }
         });
     }

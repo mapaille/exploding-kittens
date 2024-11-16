@@ -1,4 +1,4 @@
-﻿<div class="card @CardTypeClass(Model.Type)">
+﻿<div card class="card @CardTypeClass(Model.Type)">
     <div class="flex">
         @if (ActivePlayer != null)
         {
@@ -17,7 +17,7 @@
                 <button @onclick="() => ActivePlayer.PutCardBackInPile(Game, Model)" title="Remettre dans la pile">R</button>
             }
 
-            if (ActivePlayer.CanPickCard(Game, Model))
+            if (PlayerModel.CanPickCard(Game, Model))
             {
                 <button @onclick="() => ActivePlayer.PickCard(Game, Model)" title="Ramasser">R</button>
             }

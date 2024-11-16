@@ -13,7 +13,7 @@ public partial class Card
     [NotNull]
     public GameModel? Game { get; set; }
 
-    public string CardTypeClass(CardType cardType)
+    private static string CardTypeClass(CardType cardType)
     {
         return cardType switch
         {

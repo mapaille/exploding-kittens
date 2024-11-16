@@ -1,4 +1,4 @@
-﻿@inject StaticFilesVersion staticFilesVersion;
+﻿@inject StaticFilesVersion StaticFilesVersion;
 
-<script src="scripts.js?v=@(staticFilesVersion.Value)"></script>
-<script src="_framework/blazor.web.js?v=@(staticFilesVersion.Value)"></script>
+<script src="scripts.js?v=@(StaticFilesVersion.Value)"></script>
+<script src="_framework/blazor.web.js?v=@(StaticFilesVersion.Value)"></script>

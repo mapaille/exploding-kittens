@@ -1,0 +1,31 @@
+div[card] {
+  background-color: #7a826d;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 0.2rem;
+  padding: 0.6rem;
+  width: 8rem;
+  height: 10rem;
+  color: white;
+
+  &.cat-1 {
+    background-image: url('images/card_cat_1.jpg');
+  }
+
+  &.cat-2 {
+    background-image: url('images/card_cat_2.jpg');
+  }
+
+  &.cat-3 {
+    background-image: url('images/card_cat_3.jpg');
+  }
+
+  &.cat-4 {
+    background-image: url('images/card_cat_4.jpg');
+  }
+
+  &.exploding-kitten {
+    background-image: url('images/card_exploding_kitten.jpg');
+  }
+}

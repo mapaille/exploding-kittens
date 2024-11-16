@@ -484,4 +484,4 @@ $RECYCLE.BIN/
 *.swp
 
 # CSS
-/src/Mapaille.ExplodingKittens.WebApp/wwwroot/styles.css
+*.css
