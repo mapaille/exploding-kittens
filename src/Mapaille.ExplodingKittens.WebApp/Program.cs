@@ -2,6 +2,8 @@ using Mapaille.ExplodingKittens.WebApp;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
+builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddHostedService<TelemetryClientFlusherHostedService>();
 builder.Services.AddHealthChecks();
 
 builder.Services.AddRazorComponents()
