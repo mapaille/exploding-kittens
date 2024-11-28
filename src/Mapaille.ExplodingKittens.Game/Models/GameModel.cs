@@ -6,7 +6,7 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
 
     private readonly SemaphoreSlim _semaphore = new(1, 1);
 
-    public List<CardModel> Cards { get; set; } = [];
+    public List<CardModel> Cards { get; } = [];
     public List<CardModel> DiscardedCards { get; } = [];
 
     public PlayerModel PlayerA { get; } = playerA;
@@ -31,7 +31,7 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         }
         finally
         {
-            OnUpdate?.Invoke(this, new EventArgs());
+            OnUpdate?.Invoke(this, EventArgs.Empty);
             _semaphore.Release();
         }
     }
