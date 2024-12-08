@@ -18,12 +18,13 @@ public partial class Card
         return cardType switch
         {
             CardType.ExplodingKitten => "exploding-kitten",
-            CardType.Attack => $"attack",
-            CardType.Cat1 => $"cat-1",
-            CardType.Cat2 => $"cat-2",
-            CardType.Cat3 => $"cat-3",
-            CardType.Cat4 => $"cat-4",
-            CardType.Cat5 => $"cat-5",
+            CardType.Attack => "attack",
+            CardType.Cat1 => "cat-1",
+            CardType.Cat2 => "cat-2",
+            CardType.Cat3 => "cat-3",
+            CardType.Cat4 => "cat-4",
+            CardType.Cat5 => "cat-5",
+            CardType.Shuffle => "shuffle",
             _ => string.Empty,
         };
     }

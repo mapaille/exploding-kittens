@@ -32,4 +32,8 @@ div[card] {
   &.exploding-kitten {
     background-image: url('images/card_exploding_kitten.jpg');
   }
+
+  &.shuffle {
+    background-image: url('images/card_shuffle.jpg');
+  }
 }
