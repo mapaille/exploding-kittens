@@ -9,6 +9,10 @@ div[card] {
   height: 10rem;
   color: white;
 
+  &.attack {
+    background-image: url('images/card_attack.gif');
+  }
+
   &.cat-1 {
     background-image: url('images/card_cat_1.jpg');
   }

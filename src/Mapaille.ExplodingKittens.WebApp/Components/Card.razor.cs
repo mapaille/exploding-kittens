@@ -18,6 +18,7 @@ public partial class Card
         return cardType switch
         {
             CardType.ExplodingKitten => "exploding-kitten",
+            CardType.Attack => $"attack",
             CardType.Cat1 => $"cat-1",
             CardType.Cat2 => $"cat-2",
             CardType.Cat3 => $"cat-3",
