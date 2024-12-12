@@ -13,6 +13,10 @@ defaults:
   run:
     working-directory: ./src/Mapaille.ExplodingKittens.WebApp
 
+env:
+  DOTNET_VERSION: '8.0'
+  PUBLISH_DIR: '${{ github.workspace }}/publish'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,13 +36,13 @@ jobs:
         run: dotnet build -c Release -r linux-musl-x64 --no-restore
 
       - name: dotnet publish
-        run: dotnet publish -c Release -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true -p:PublishDir=./app --no-build
+        run: dotnet publish -c Release -r linux-musl-x64 -p:PublishReadyToRun=true -p:PublishReadyToRunComposite=true -p:PublishDir=${{ env.PUBLISH_DIR }} --no-build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ./app
+          path: ${{ env.PUBLISH_DIR }}/publish
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,4 +73,3 @@ jobs:
           app-name: 'exploding-kittens-canadaeast'
           slot-name: 'Production'
           package: .
-          
