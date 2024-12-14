@@ -12,6 +12,8 @@ public partial class Game : IAsyncDisposable
 
     public PlayerModel? Player { get; set; }
 
+    public bool PlayerExploded => Model.PlayerExploded;
+
     public async Task SeeTheFuture()
     {
         var next3CardNames = Model.Cards.Take(3).Select(x => x.GetName());

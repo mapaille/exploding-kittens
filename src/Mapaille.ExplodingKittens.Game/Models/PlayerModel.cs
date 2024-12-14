@@ -6,6 +6,8 @@ public class PlayerModel
 
     public List<CardModel> Cards { get; } = [];
 
+    public bool IsExploded => Cards.Any(x => x.Type == CardType.ExplodingKitten);
+
     public async void PutCardBackInPile(GameModel game, CardModel card)
     {
         await game.SafeUpdateAsync(() =>

@@ -12,6 +12,8 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
     public PlayerModel PlayerA { get; } = playerA;
     public PlayerModel PlayerB { get; } = playerB;
 
+    public bool PlayerExploded => PlayerA.IsExploded || PlayerB.IsExploded;
+
     public async Task ResetAsync()
     {
         await SafeUpdateAsync(() =>
