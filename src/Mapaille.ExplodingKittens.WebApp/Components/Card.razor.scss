@@ -33,8 +33,16 @@ div[card] {
     background-image: url('images/card_cat_5.jpg');
   }
 
+  &.defuse {
+    background-image: url('images/card_defuse.jpg');
+  }
+
   &.exploding-kitten {
     background-image: url('images/card_exploding_kitten.jpg');
+  }
+
+  &.nope {
+    background-image: url('images/card_nope.jpg');
   }
 
   &.shuffle {
