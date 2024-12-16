@@ -55,9 +55,13 @@ public class PlayerModel
     {
         await game.SafeUpdateAsync(() =>
         {
-            var card = game.Cards.First();
-            game.Cards.Remove(card);
-            Cards.Add(card);
+            var card = game.Cards.FirstOrDefault();
+
+            if (card != null)
+            {
+                game.Cards.Remove(card);
+                Cards.Add(card);
+            }
         });
     }
 
