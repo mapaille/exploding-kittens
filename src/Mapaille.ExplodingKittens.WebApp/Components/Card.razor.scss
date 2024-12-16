@@ -37,8 +37,16 @@ div[card] {
     background-image: url('images/card_defuse.jpg');
   }
 
+  &.divination {
+    background-image: url('images/card_divination.jpg');
+  }
+
   &.exploding-kitten {
     background-image: url('images/card_exploding_kitten.jpg');
+  }
+
+  &.favor {
+    background-image: url('images/card_favor.jpg');
   }
 
   &.nope {
@@ -47,5 +55,9 @@ div[card] {
 
   &.shuffle {
     background-image: url('images/card_shuffle.jpg');
+  }
+
+  &.skip {
+    background-image: url('images/card_skip.jpg');
   }
 }
