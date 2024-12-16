@@ -83,6 +83,7 @@ public partial class Game : IAsyncDisposable
     public async void ShuffleCards()
     {
         await Model.ShuffleCardsAsync();
+        await JS.InvokeVoidAsync("showAlert", "Cartes mélangées");
     }
 
     public ValueTask DisposeAsync()
