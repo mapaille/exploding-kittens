@@ -80,6 +80,11 @@ public partial class Game : IAsyncDisposable
         return Player == Model.PlayerB;
     }
 
+    public async void ShuffleCards()
+    {
+        await Model.ShuffleCardsAsync();
+    }
+
     public ValueTask DisposeAsync()
     {
         Model.OnUpdate -= UpdateState;

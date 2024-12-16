@@ -38,6 +38,11 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         }
     }
 
+    public async Task ShuffleCardsAsync()
+    {
+        await SafeUpdateAsync(Cards.Shuffle);
+    }
+
     private void PassCards()
     {
         var cards = new List<CardModel>();

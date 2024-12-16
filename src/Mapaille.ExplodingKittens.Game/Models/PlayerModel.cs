@@ -115,11 +115,6 @@ public class PlayerModel
         {
             if (!Cards.Remove(card)) return;
             game.DiscardedCards.Add(card);
-
-            if (card.Type == CardType.Shuffle)
-            {
-                game.Cards.Shuffle();
-            }
         });
     }
 }
