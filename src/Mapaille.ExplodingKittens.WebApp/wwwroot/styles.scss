@@ -1,5 +1,7 @@
 ﻿@import "../Components/Card.razor";
 
+$color-primary: #e84631;
+
 * {
     touch-action: manipulation;
     font-family: Arial, Helvetica, sans-serif
@@ -26,8 +28,13 @@ button.active {
     color: white;
 }
 
+button:active {
+    background-color: lightgray;
+    color: black;
+}
+
 h3.primary {
-    background-color: #e84631;
+    background-color: $color-primary;
     color: white;
     padding: 0.6rem;
     width: fit-content;
