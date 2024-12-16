@@ -45,4 +45,11 @@ div.flex {
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
+
+    &.flex-end {
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 100%;
+        width: 100%;
+    }
 }

@@ -8,6 +8,11 @@ div[card] {
   width: 8rem;
   height: 10rem;
   color: white;
+  
+  button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
 
   &.attack {
     background-image: url('images/card_attack.gif');
