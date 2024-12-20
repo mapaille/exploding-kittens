@@ -9,9 +9,23 @@ public partial class Card
     [Parameter]
     public required PlayerModel? ActivePlayer { get; set; }
 
+    [Parameter]
+    [EditorRequired]
+    public required ButtonsPosition ButtonsPosition { get; set; }
+
     [Inject]
     [NotNull]
     public GameModel? Game { get; set; }
+
+    private string GetButtonsPositionClass()
+    {
+        return ButtonsPosition switch
+        {
+            ButtonsPosition.Bottom => "flex-bottom",
+            ButtonsPosition.Top => "flex-top",
+            _ => string.Empty,
+        };
+    }
 
     private static string CardTypeClass(CardType cardType)
     {

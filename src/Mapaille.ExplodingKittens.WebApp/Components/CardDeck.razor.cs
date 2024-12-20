@@ -8,4 +8,8 @@ public partial class CardDeck
 
     [Parameter]
     public required PlayerModel? ActivePlayer { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public required ButtonsPosition ButtonsPosition { get; set; }
 }

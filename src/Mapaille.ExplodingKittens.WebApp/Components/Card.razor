@@ -1,5 +1,5 @@
 ﻿<div card class="card @CardTypeClass(Model.Type)">
-    <div class="flex flex-end">
+    <div class="flex @GetButtonsPositionClass()">
         @if (ActivePlayer != null)
         {
             if (ActivePlayer.CanDiscardCard(Model))
