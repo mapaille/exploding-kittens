@@ -12,6 +12,10 @@ div[card] {
   button {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
+
+    &:active {
+      background-color: rgba(50, 50, 50, 0.5);
+    }
   }
 
   &.attack {
