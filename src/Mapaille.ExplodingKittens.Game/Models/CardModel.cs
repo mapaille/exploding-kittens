@@ -29,6 +29,7 @@ public record CardModel
             CardType.Cat3 => "Chat 3",
             CardType.Cat4 => "Chat 4",
             CardType.Cat5 => "Chat 5",
+            CardType.Peek => "Coup d'oeil",
             _ => string.Empty
         };
     }
