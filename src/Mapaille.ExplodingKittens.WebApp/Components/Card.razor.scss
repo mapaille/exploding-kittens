@@ -27,7 +27,7 @@ div[card] {
   }
 
   &.cat-2 {
-    background-image: url('images/card_cat_2.jpg?v3');
+    background-image: url('images/card_cat_2.jpg?v4');
   }
 
   &.cat-3 {
@@ -68,5 +68,9 @@ div[card] {
 
   &.skip {
     background-image: url('images/card_skip.jpg?v3');
+  }
+
+  &.peek {
+    background-image: url('images/card_peek.jpg?v1');
   }
 }

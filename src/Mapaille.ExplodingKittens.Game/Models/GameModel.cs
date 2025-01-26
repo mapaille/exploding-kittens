@@ -91,6 +91,7 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         }
 
         cards.Add(CardType.ExplodingKitten);
+        cards.Add(CardType.Peek, 2);
         cards.Shuffle();
         Cards.AddRange(cards);
     }

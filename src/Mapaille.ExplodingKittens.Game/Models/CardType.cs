@@ -14,5 +14,6 @@ public enum CardType
     Cat2,
     Cat3,
     Cat4,
-    Cat5
+    Cat5,
+    Peek
 }

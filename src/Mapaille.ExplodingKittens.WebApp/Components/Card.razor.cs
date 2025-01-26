@@ -44,6 +44,7 @@ public partial class Card
             CardType.Nope => "nope",
             CardType.Shuffle => "shuffle",
             CardType.Skip => "skip",
+            CardType.Peek => "peek",
             _ => string.Empty,
         };
     }
