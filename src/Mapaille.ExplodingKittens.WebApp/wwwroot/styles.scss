@@ -2,6 +2,24 @@
 
 $color-primary: #e84631;
 
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(50vh);
+        opacity: 0;
+    }
+}
+
+.falling-heart {
+    position: absolute;
+    animation: fall 5s linear infinite;
+}
+
+
 * {
     touch-action: manipulation;
     font-family: Arial, Helvetica, sans-serif
