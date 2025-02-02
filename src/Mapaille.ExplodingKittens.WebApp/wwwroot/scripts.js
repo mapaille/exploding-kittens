@@ -22,6 +22,7 @@ const createFallingHearts = () => {
     setInterval(() => {
         const heart = document.createElement('div');
         heart.textContent = '❤️';
+        heart.style.fontSize = '2rem';
         heart.classList.add('falling-heart');
         heart.style.left = `${Math.random() * 100}%`;
         heart.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration for variety
@@ -30,8 +31,8 @@ const createFallingHearts = () => {
         // Remove heart after animation
         setTimeout(() => {
             heart.remove();
-        }, 10000);
-    }, 1000); // Adjust interval to control heart frequency
+        }, 15000);
+    }, 3000); // Adjust interval to control heart frequency
 }
 
 window.onload = createFallingHearts;
