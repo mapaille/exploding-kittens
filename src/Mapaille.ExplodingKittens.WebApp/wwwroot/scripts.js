@@ -22,7 +22,7 @@ const createFallingHearts = () => {
     setInterval(() => {
         const heart = document.createElement('div');
         heart.textContent = '❤️';
-        heart.style.fontSize = '2rem';
+        heart.style.fontSize = '1.5rem';
         heart.classList.add('falling-heart');
         heart.style.left = `${Math.random() * 100}%`;
         heart.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration for variety
