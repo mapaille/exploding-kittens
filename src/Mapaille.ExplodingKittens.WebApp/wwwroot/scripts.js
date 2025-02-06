@@ -32,7 +32,7 @@ const createFallingHearts = () => {
         setTimeout(() => {
             heart.remove();
         }, 15000);
-    }, 3000); // Adjust interval to control heart frequency
+    }, 1000); // Adjust interval to control heart frequency
 }
 
 window.onload = createFallingHearts;
