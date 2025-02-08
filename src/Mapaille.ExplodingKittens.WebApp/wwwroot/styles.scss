@@ -15,10 +15,18 @@ $color-primary: #e84631;
 }
 
 .falling-heart {
+    color: red;
+    font-size: 1.5rem;
     position: absolute;
     animation: fall 5s linear infinite;
 }
 
+.falling-snowflake {
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    animation: fall 5s linear infinite;
+}
 
 * {
     touch-action: manipulation;
