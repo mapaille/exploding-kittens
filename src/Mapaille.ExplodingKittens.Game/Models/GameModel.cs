@@ -40,13 +40,11 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
 
     public async Task ShuffleCardsAsync()
     {
-        await SafeUpdateAsync(Cards.Shuffle);
+        await SafeUpdateAsync(() => Cards.Shuffle());
     }
 
     private void PassCards()
     {
-        var cards = new List<CardModel>();
-
         PlayerA.Cards.Add(CardType.Defuse);
         PlayerB.Cards.Add(CardType.Defuse);
 
@@ -68,32 +66,28 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
 
         cardsToPass.Shuffle();
 
-        for (var i = 0; i < cardsToPass.Count; i++)
+        do
         {
-            if (i %  2 == 0)
+            if (PlayerA.Cards.Count < 8)
             {
-                if (PlayerA.Cards.Count < 8)
-                {
-                    PlayerA.Cards.Add(cardsToPass.ElementAt(i));
-                    continue;
-                }
-            }
-            else
-            {
-                if (PlayerB.Cards.Count < 8)
-                {
-                    PlayerB.Cards.Add(cardsToPass.ElementAt(i));
-                    continue;
-                }
+                var card = cardsToPass.First();
+                cardsToPass.Remove(card);
+                PlayerA.Cards.Add(card);
             }
 
-            cards.Add(cardsToPass.ElementAt(i));
+            if (PlayerB.Cards.Count < 8)
+            {
+                var card = cardsToPass.First();
+                cardsToPass.Remove(card);
+                PlayerB.Cards.Add(card);
+            }
         }
+        while (PlayerA.Cards.Count != 8 && PlayerB.Cards.Count != 8);
 
-        cards.Add(CardType.ExplodingKitten);
-        cards.Add(CardType.Peek, 2);
-        cards.Shuffle();
-        Cards.AddRange(cards);
+        Cards.AddRange(cardsToPass);
+        Cards.Add(CardType.ExplodingKitten);
+        Cards.Add(CardType.Peek, 2);
+        Cards.Shuffle();
     }
 
     private void ClearCards()
