@@ -14,7 +14,7 @@ defaults:
     working-directory: ./src/Mapaille.ExplodingKittens.WebApp
 
 env:
-  DOTNET_VERSION: '8.0'
+  DOTNET_VERSION: '9.0'
   PUBLISH_DIR: '${{ github.workspace }}/publish'
 
 jobs:
@@ -62,14 +62,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F3B0255713BD4B8D8BA71CC5E6F6A79A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CBEC093C5C8A4BD2ADC12B25DABB3731 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D1836E30231B46B49350D9E8B4D7E467 }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'app-explodingkittens-prod-canadaeast-001'
+          app-name: 'app-explodingkittens-prod-canadacentral-001'
           slot-name: 'Production'
           package: .
