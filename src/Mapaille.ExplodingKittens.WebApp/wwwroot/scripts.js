@@ -39,11 +39,20 @@ function fallInContainer(action, container) {
     }, interval);
 }
 
-const createFallingEffects = () => {
+const createFallingEffects = (options) => {
     const fallingContainer = createFallingContainer();
     document.body.appendChild(fallingContainer);
-    fallInContainer(createHeart, fallingContainer);
-    //fallInContainer(createSnowflake, fallingContainer);
+
+    if (options.hearts) {
+        fallInContainer(createHeart, fallingContainer);
+    }
+
+    if (options.snowflakes) {
+        fallInContainer(createSnowflake, fallingContainer);
+    }
 }
 
-window.onload = createFallingEffects;
+window.onload = () => createFallingEffects({
+    hearts: true,
+    snowflakes: false,
+});
