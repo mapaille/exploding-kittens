@@ -1,29 +1,51 @@
 ﻿namespace Mapaille.ExplodingKittens.Game.Models;
 
-public class GameModel(PlayerModel playerA, PlayerModel playerB)
+public class GameModel : IDisposable
 {
-    public event EventHandler? OnUpdate;
-
     private readonly SemaphoreSlim _semaphore = new(1, 1);
+    private bool _disposed;
+
+    public GameModel()
+    {
+        PlayerA = new PlayerModel(this);
+        PlayerB = new PlayerModel(this);
+    }
+
+    public event EventHandler? OnUpdate;
 
     public List<CardModel> Cards { get; } = [];
     public List<CardModel> DiscardedCards { get; } = [];
 
-    public PlayerModel PlayerA { get; } = playerA;
-    public PlayerModel PlayerB { get; } = playerB;
+    public PlayerModel PlayerA { get; }
+    public PlayerModel PlayerB { get; }
 
     public bool PlayerExploded => PlayerA.IsExploded || PlayerB.IsExploded;
 
-    public async Task ResetAsync()
+    public Task Reset()
     {
-        await SafeUpdateAsync(() =>
+        return SynchronizeUpdateAsync(() =>
         {
             ClearCards();
             PassCards();
         });
     }
 
-    public async Task SafeUpdateAsync(Action action)
+    public async Task SynchronizeUpdateAsync(Func<Task> action)
+    {
+        await _semaphore.WaitAsync();
+
+        try
+        {
+            await action();
+        }
+        finally
+        {
+            _semaphore.Release();
+            OnUpdate?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public async Task SynchronizeUpdateAsync(Action action)
     {
         await _semaphore.WaitAsync();
 
@@ -33,14 +55,14 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         }
         finally
         {
-            OnUpdate?.Invoke(this, EventArgs.Empty);
             _semaphore.Release();
+            OnUpdate?.Invoke(this, EventArgs.Empty);
         }
     }
 
-    public async Task ShuffleCardsAsync()
+    public Task ShuffleCards()
     {
-        await SafeUpdateAsync(() => Cards.Shuffle());
+        return SynchronizeUpdateAsync(Cards.Shuffle);
     }
 
     private void PassCards()
@@ -96,5 +118,15 @@ public class GameModel(PlayerModel playerA, PlayerModel playerB)
         DiscardedCards.Clear();
         PlayerA.Cards.Clear();
         PlayerB.Cards.Clear();
+    }
+
+    public void Dispose()
+    {
+        if (!_disposed)
+        {
+            _semaphore.Dispose();
+            _disposed = true;
+            GC.SuppressFinalize(this);
+        }
     }
 }

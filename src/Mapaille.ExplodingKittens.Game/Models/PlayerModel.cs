@@ -1,6 +1,6 @@
 ﻿namespace Mapaille.ExplodingKittens.Game.Models;
 
-public class PlayerModel
+public class PlayerModel(GameModel game)
 {
     public Guid Id { get; } = Guid.NewGuid();
 
@@ -8,9 +8,9 @@ public class PlayerModel
 
     public bool IsExploded => Cards.Any(x => x.Type == CardType.ExplodingKitten);
 
-    public async void PutCardBackInPile(GameModel game, CardModel card)
+    public Task PutCardBackInPile(CardModel card)
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             if (Cards.Remove(card))
             {
@@ -19,9 +19,9 @@ public class PlayerModel
         });
     }
 
-    public async void StealCard(GameModel game)
+    public Task StealCard()
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             CardModel? card = null;
 
@@ -51,9 +51,9 @@ public class PlayerModel
         });
     }
 
-    public async void PickCard(GameModel game)
+    public Task PickCard()
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             var card = game.Cards.FirstOrDefault();
 
@@ -65,9 +65,9 @@ public class PlayerModel
         });
     }
 
-    public async void PickCard(GameModel game, CardModel card)
+    public Task PickCard(CardModel card)
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             if (game.Cards.Remove(card) || game.DiscardedCards.Remove(card))
             {
@@ -91,14 +91,14 @@ public class PlayerModel
         return card.Type == CardType.ExplodingKitten && Cards.Contains(card);
     }
 
-    public static bool CanPickCard(GameModel game, CardModel card)
+    public bool CanPickCard(CardModel card)
     {
         return game.Cards.FirstOrDefault() == card || game.DiscardedCards.Contains(card);
     }
 
-    public async void GiveCard(GameModel game, CardModel card)
+    public Task GiveCard(CardModel card)
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             if (!Cards.Remove(card)) return;
             
@@ -113,9 +113,9 @@ public class PlayerModel
         });
     }
 
-    public async void DiscardCard(GameModel game, CardModel card)
+    public Task DiscardCard(CardModel card)
     {
-        await game.SafeUpdateAsync(() =>
+        return game.SynchronizeUpdateAsync(() =>
         {
             if (!Cards.Remove(card)) return;
             game.DiscardedCards.Add(card);

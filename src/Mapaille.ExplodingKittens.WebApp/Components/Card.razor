@@ -4,22 +4,22 @@
         {
             if (ActivePlayer.CanDiscardCard(Model))
             {
-                <button @onclick="() => ActivePlayer.DiscardCard(Game, Model)" title="Défausser">D</button>
+                <button @onclick="DiscardCardAsync" title="Défausser">D</button>
             }
 
             if (ActivePlayer.CanGiveCard(Model))
             {
-                <button @onclick="() => ActivePlayer.GiveCard(Game, Model)" title="Transférer à l'autre joueur">T</button>
+                <button @onclick="GiveCardAsync" title="Transférer à l'autre joueur">T</button>
             }
 
             if (ActivePlayer.CanPutCardBackInPile(Model))
             {
-                <button @onclick="() => ActivePlayer.PutCardBackInPile(Game, Model)" title="Remettre dans la pile">R</button>
+                <button @onclick="PutCardBackInPileAsync" title="Remettre dans la pile">R</button>
             }
 
-            if (PlayerModel.CanPickCard(Game, Model))
+            if (ActivePlayer.CanPickCard(Model))
             {
-                <button @onclick="() => ActivePlayer.PickCard(Game, Model)" title="Ramasser">R</button>
+                <button @onclick="PickCardAsync" title="Ramasser">R</button>
             }
         }
     </div>

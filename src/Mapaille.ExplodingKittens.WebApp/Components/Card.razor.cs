@@ -27,6 +27,38 @@ public partial class Card
         };
     }
 
+    private async Task DiscardCardAsync()
+    {
+        if (ActivePlayer != null)
+        {
+            await ActivePlayer.DiscardCard(Model);
+        }
+    }
+
+    private async Task GiveCardAsync()
+    {
+        if (ActivePlayer != null)
+        {
+            await ActivePlayer.GiveCard(Model);
+        }
+    }
+
+    private async Task PutCardBackInPileAsync()
+    {
+        if (ActivePlayer != null)
+        {
+            await ActivePlayer.PutCardBackInPile(Model);
+        }
+    }
+
+    private async Task PickCardAsync()
+    {
+        if (ActivePlayer != null)
+        {
+            await ActivePlayer.PickCard(Model);
+        }
+    }
+
     private static string CardTypeClass(CardType cardType)
     {
         return cardType switch

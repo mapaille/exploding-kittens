@@ -19,17 +19,7 @@ internal static class ListExtensions
         }
     }
 
-    public static void Shuffle(this List<CardModel> source, int count = 3)
-    {
-        ArgumentOutOfRangeException.ThrowIfLessThan(count, 1);
-
-        for (var i = 0; i < count; i++)
-        {
-            source.Shuffle();
-        }
-    }
-
-    private static void Shuffle(this List<CardModel> source)
+    public static void Shuffle(this List<CardModel> source)
     {
         int n = source.Count;
         while (n > 1)

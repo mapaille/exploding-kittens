@@ -80,9 +80,9 @@ public partial class Game : IAsyncDisposable
         return Player == Model.PlayerB;
     }
 
-    public async void ShuffleCards()
+    public async Task ShuffleCards()
     {
-        await Model.ShuffleCardsAsync();
+        await Model.ShuffleCards();
         await JS.InvokeVoidAsync("showAlert", "Cartes mélangées");
     }
 
