@@ -27,7 +27,27 @@ public partial class Card
         };
     }
 
-    private async Task DiscardCardAsync()
+    private bool CanBeDiscarded()
+    {
+        return ActivePlayer?.CanDiscardCard(Model) ?? false;
+    }
+
+    private bool CanBeGiven()
+    {
+        return ActivePlayer?.CanGiveCard(Model) ?? false;
+    }
+
+    private bool CanBePutBackInPile()
+    {
+        return ActivePlayer?.CanPutCardBackInPile(Model) ?? false;
+    }
+
+    private bool CanBePicked()
+    {
+        return ActivePlayer?.CanPickCard(Model) ?? false;
+    }
+
+    private async Task DiscardAsync()
     {
         if (ActivePlayer != null)
         {
@@ -35,7 +55,7 @@ public partial class Card
         }
     }
 
-    private async Task GiveCardAsync()
+    private async Task GiveAsync()
     {
         if (ActivePlayer != null)
         {
@@ -43,7 +63,7 @@ public partial class Card
         }
     }
 
-    private async Task PutCardBackInPileAsync()
+    private async Task PutBackInPileAsync()
     {
         if (ActivePlayer != null)
         {
@@ -51,7 +71,7 @@ public partial class Card
         }
     }
 
-    private async Task PickCardAsync()
+    private async Task PickAsync()
     {
         if (ActivePlayer != null)
         {
