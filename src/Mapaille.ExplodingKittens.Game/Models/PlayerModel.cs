@@ -19,7 +19,19 @@ public class PlayerModel(GameModel game)
         });
     }
 
-    public Task StealCard()
+    public Task ShuffleGameCards()
+    {
+        return game.SynchronizeUpdateAsync(game.Cards.Shuffle);
+    }
+
+    public string SeeTheFuture()
+    {
+        var next3CardNames = game.Cards.Take(3).Select(x => x.GetName());
+        var message = string.Join(", ", next3CardNames);
+        return message;
+    }
+
+    public Task StealPlayerCard()
     {
         return game.SynchronizeUpdateAsync(() =>
         {
@@ -51,7 +63,7 @@ public class PlayerModel(GameModel game)
         });
     }
 
-    public Task PickCard()
+    public Task PickGameCard()
     {
         return game.SynchronizeUpdateAsync(() =>
         {

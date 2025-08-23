@@ -60,11 +60,6 @@ public class GameModel : IDisposable
         }
     }
 
-    public Task ShuffleCards()
-    {
-        return SynchronizeUpdateAsync(Cards.Shuffle);
-    }
-
     private void PassCards()
     {
         PlayerA.Cards.Add(CardType.Defuse);

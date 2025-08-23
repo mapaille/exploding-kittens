@@ -3,23 +3,12 @@
 public partial class Game : IAsyncDisposable
 {
     [Inject]
-    [NotNull]
-    public GameModel? Model { get; set; }
+    public GameModel Model { get; set; } = null!;
 
     [Inject]
-    [NotNull]
-    public IJSRuntime? JS { get; set; }
+    public IJSRuntime JS { get; set; } = null!;
 
     public PlayerModel? Player { get; set; }
-
-    public bool PlayerExploded => Model.PlayerExploded;
-
-    public async Task SeeTheFuture()
-    {
-        var next3CardNames = Model.Cards.Take(3).Select(x => x.GetName());
-        var message = string.Join(", ", next3CardNames);
-        await JS.InvokeVoidAsync("showAlert", message);
-    }
 
     public string GetActivePlayerClass(PlayerModel? player, PlayerModel target)
     {
@@ -80,10 +69,48 @@ public partial class Game : IAsyncDisposable
         return Player == Model.PlayerB;
     }
 
-    public async Task ShuffleCards()
+    public bool IsPlayerExploded()
     {
-        await Model.ShuffleCards();
-        await JS.InvokeVoidAsync("showAlert", "Cartes mélangées");
+        return Model.PlayerExploded;
+    }
+
+    public async Task ResetGame()
+    {
+        await Model.Reset();
+    }
+
+    public async Task SeeTheFuture()
+    {
+        if (Player != null)
+        {
+            var future = Player.SeeTheFuture();
+            await JS.InvokeVoidAsync("showAlert", future);
+        }
+    }
+
+    public async Task ShuffleGameCards()
+    {
+        if (Player != null)
+        {
+            await Player.ShuffleGameCards();
+            await JS.InvokeVoidAsync("showAlert", "Cartes mélangées");
+        }
+    }
+
+    public async Task PickGameCard()
+    {
+        if (Player != null)
+        {
+            await Player.PickGameCard();
+        }
+    }
+
+    public async Task StealPlayerCard()
+    {
+        if (Player != null)
+        {
+            await Player.StealPlayerCard();
+        }
     }
 
     public ValueTask DisposeAsync()

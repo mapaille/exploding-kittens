@@ -1,39 +1,34 @@
 ﻿@rendermode InteractiveServer
 
 <div class="flex">
-    <button @onclick="Model.Reset">Réinitialiser</button>
+    <button @onclick="ResetGame">Réinitialiser</button>
     <button class="@GetActivePlayerClass(Player, Model.PlayerA)" @onclick="SelectPlayerA">Marc (@Model.PlayerA.Cards.Count)</button>
     <button class="@GetActivePlayerClass(Player, Model.PlayerB)" @onclick="SelectPlayerB">Estelle (@Model.PlayerB.Cards.Count)</button>
 
     @if (Player != null)
     {
-        <button @onclick="() => Player.PickCard()">Piger</button>
-        <button @onclick="() => Player.StealCard()">Voler</button>
+        <button @onclick="PickGameCard">Piger</button>
+        <button @onclick="StealPlayerCard">Voler</button>
+        <button @onclick="ShuffleGameCards">Mélanger</button>
         <button @onclick="SeeTheFuture">Voir le futur</button>
-        <button @onclick="ShuffleCards">Mélanger</button>
     }
 </div>
 
 <h3 class="primary">@Model.Cards.Count cartes restantes</h3>
 
-@if (IsPlayerA())
+@if (Player != null)
 {
-    <Player Model="@Model.PlayerA" />
-}
-
-@if (IsPlayerB())
-{
-    <Player Model="@Model.PlayerB" />
+    <h3 class="primary">Mes cartes</h3>
+    <CardDeck Cards="Player.Cards" ActivePlayer="Player" ButtonsPosition="ButtonsPosition.Bottom" />
 }
 
 <h3 class="primary">Cartes défaussées</h3>
 
 <CardDeck Cards="@Model.DiscardedCards" ActivePlayer="Player" ButtonsPosition="ButtonsPosition.Top" />
 
-@if (PlayerExploded)
+@if (IsPlayerExploded())
 {
-    <div class="exploded">
-    </div>
+    <div class="exploded" />
 }
 
 <style>
