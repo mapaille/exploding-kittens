@@ -54,5 +54,6 @@ const createFallingEffects = (options) => {
 
 window.onload = () => createFallingEffects({
     hearts: true,
-    snowflakes: false,
+    snowflakes: true,
 });
+
